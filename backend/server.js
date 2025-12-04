@@ -1,12 +1,40 @@
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const { initDatabase, getDatabase, saveDatabase } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors());
+// Rate limiting - prevent DoS and bot abuse
+const limiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 60, // limit each IP to 60 requests per minute
+    message: { error: 'Too many requests, please try again later.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use(limiter);
+
+// CORS - restrict to allowed origins
+const allowedOrigins = [
+    'https://privacy-kit.vercel.app',
+    'http://localhost:8080',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc.)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'));
+    }
+}));
+
 app.use(express.json());
 
 // Generate random 6-character short code
