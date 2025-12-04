@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrivacyKit - Privacy Toolkit</title>
+  <meta name="description" content="A minimal privacy toolkit with URL cleaner and expiring link generator">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🔐</span>
+        <h1>PrivacyKit</h1>
+      </div>
+      <p class="tagline">Your minimal privacy toolkit</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="url-cleaner">
+        <span class="tab-icon">🧹</span>
+        URL Cleaner
+      </button>
+      <button class="tab-btn" data-tab="link-generator">
+        <span class="tab-icon">🔗</span>
+        LinkShortVault
+      </button>
+    </nav>
+
+    <main class="content">
+      <!-- URL Cleaner Tab -->
+      <section id="url-cleaner" class="tab-content active">
+        <div class="card">
+          <h2>Clean Your URL</h2>
+          <p class="card-description">Remove tracking parameters and clean up messy URLs</p>
+
+          <div class="input-group">
+            <label for="dirty-url">Paste your URL</label>
+            <input type="url" id="dirty-url" placeholder="https://example.com?utm_source=...&ref=...">
+          </div>
+
+          <button id="clean-url-btn" class="primary-btn">
+            <span>Clean URL</span>
+          </button>
+
+          <div id="clean-result" class="result hidden">
+            <div class="result-header">
+              <span class="result-label">Cleaned URL</span>
+              <span id="params-removed" class="badge"></span>
+            </div>
+            <div class="result-content">
+              <input type="text" id="cleaned-url" readonly>
+              <button id="copy-clean-btn" class="copy-btn" title="Copy to clipboard">
+                📋
+              </button>
+            </div>
+          </div>
+          <p class="trust-note">🔒 No data stored. All cleaning happens client-side.</p>
+        </div>
+      </section>
+
+      <!-- Link Generator Tab -->
+      <section id="link-generator" class="tab-content">
+        <div class="card">
+          <h2>Create Expiring Link</h2>
+          <p class="card-description">Generate private short links with expiry and click limits</p>
+
+          <div class="input-group">
+            <label for="original-url">Original URL</label>
+            <input type="url" id="original-url" placeholder="https://your-private-link.com/doc">
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="expiry-hours">Expires in (hours)</label>
+              <input type="number" id="expiry-hours" placeholder="24" min="0">
+            </div>
+            <div class="input-group">
+              <label for="max-clicks">Max clicks</label>
+              <input type="number" id="max-clicks" placeholder="10" min="1">
+            </div>
+          </div>
+
+          <button id="generate-link-btn" class="primary-btn">
+            <span>Generate Link</span>
+          </button>
+
+          <div id="link-result" class="result hidden">
+            <div class="result-header">
+              <span class="result-label">Your Private Link</span>
+            </div>
+            <div class="result-content">
+              <input type="text" id="generated-url" readonly>
+              <button id="copy-link-btn" class="copy-btn" title="Copy to clipboard">
+                📋
+              </button>
+            </div>
+            <div class="link-info">
+              <span id="link-expiry"></span>
+              <span id="link-clicks"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>PrivacyKit • All processing happens client-side or on your server</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
