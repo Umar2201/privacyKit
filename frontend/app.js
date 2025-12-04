@@ -1,5 +1,5 @@
 // ===== Configuration =====
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://privacykit-2.onrender.com';
 
 // ===== DOM Elements =====
 const tabBtns = document.querySelectorAll('.tab-btn');
