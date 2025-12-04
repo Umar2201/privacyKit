@@ -117,7 +117,7 @@ app.get('/:code', (req, res) => {
         });
 
         // Frontend URL for home button
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:8080';
+        const frontendUrl = process.env.FRONTEND_URL || 'https://privacy-kit.vercel.app';
 
         // Check if already inactive
         if (!link.active) {
