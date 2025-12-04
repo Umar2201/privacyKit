@@ -79,7 +79,7 @@ app.post('/create', (req, res) => {
         saveDatabase();
 
         // Build short URL - users HATE manual building of URLs
-        const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+        const baseUrl = process.env.BASE_URL || 'https://privacykit-2.onrender.com';
         const short_url = `${baseUrl}/${short_code}`;
 
         res.json({
